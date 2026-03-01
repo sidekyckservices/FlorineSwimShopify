@@ -1,0 +1,88 @@
+<section class="philosophy section-padding"
+  style="background-color: {{ section.settings.background_color }};{% if section.settings.background_image != blank %} background-image: url('{{ section.settings.background_image | image_url: width: 1920 }}'); background-size: cover; background-position: center;{% endif %}">
+  <div class="philosophy__inner animate-on-scroll">
+    <h2 class="philosophy__title">{{ section.settings.heading }}</h2>
+
+    {% if section.settings.paragraph_1 != blank %}
+      <p class="philosophy__text">{{ section.settings.paragraph_1 }}</p>
+    {% endif %}
+
+    {% if section.settings.paragraph_2 != blank %}
+      <p class="philosophy__text">{{ section.settings.paragraph_2 }}</p>
+    {% endif %}
+
+    {% if section.settings.paragraph_3 != blank %}
+      <p class="philosophy__text">{{ section.settings.paragraph_3 }}</p>
+    {% endif %}
+
+    <div class="divider philosophy__divider"></div>
+
+    {% if section.settings.quote_line_1 != blank %}
+      <p class="philosophy__quote">{{ section.settings.quote_line_1 }}</p>
+    {% endif %}
+
+    {% if section.settings.quote_line_2 != blank %}
+      <p class="philosophy__quote">{{ section.settings.quote_line_2 }}</p>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Philosophy",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#E6DED3"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Designed for Real Life."
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_1",
+      "label": "Paragraph 1",
+      "default": "Pool days. Beach walks. Family vacations. Slow mornings near the water."
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_2",
+      "label": "Paragraph 2",
+      "default": "Florine Swim is made for the moments that matter -- not the mirror."
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_3",
+      "label": "Paragraph 3",
+      "default": "Each piece is created with thoughtful coverage and gentle support, so nothing pulls, shifts, or distracts you from being present."
+    },
+    {
+      "type": "text",
+      "id": "quote_line_1",
+      "label": "Quote Line 1",
+      "default": "You are already enough."
+    },
+    {
+      "type": "text",
+      "id": "quote_line_2",
+      "label": "Quote Line 2",
+      "default": "We simply design swimwear that lets you feel it."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Philosophy"
+    }
+  ]
+}
+{% endschema %}

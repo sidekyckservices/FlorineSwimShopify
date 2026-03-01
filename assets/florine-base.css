@@ -1,0 +1,746 @@
+/* ==========================================================================
+   Florine Swim — Shopify Theme Styles
+   Converted from React/Tailwind to hand-written CSS
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   CSS Custom Properties (from src/index.css)
+   -------------------------------------------------------------------------- */
+:root {
+  /* Core palette */
+  --background: 30 43% 97%;
+  --foreground: 24 5% 27%;
+  --primary: 120 12% 77%;
+  --primary-foreground: 24 5% 27%;
+  --secondary: 28 22% 86%;
+  --secondary-foreground: 24 5% 27%;
+  --muted: 27 25% 76%;
+  --muted-foreground: 24 5% 20%;
+  --accent: 33 30% 81%;
+  --accent-foreground: 24 5% 27%;
+  --border: 27 20% 82%;
+  --input: 27 25% 76%;
+  --ring: 120 12% 77%;
+  --radius: 1.5rem;
+
+  /* Florine brand tokens */
+  --florine-cream: 30 43% 97%;
+  --florine-tan: 28 22% 86%;
+  --florine-light-brown: 27 25% 76%;
+  --florine-green: 120 12% 77%;
+  --florine-yellow: 33 30% 81%;
+  --florine-dark-brown: 24 8% 58%;
+  --florine-charcoal: 24 5% 27%;
+}
+
+/* --------------------------------------------------------------------------
+   Reset & Base
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border-color: hsl(var(--border));
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'STIX Two Text', serif;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+/* --------------------------------------------------------------------------
+   Shared: Section Padding
+   -------------------------------------------------------------------------- */
+.section-padding {
+  padding: 5rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding: 7rem 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding: 8rem 6rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Shared: Buttons
+   -------------------------------------------------------------------------- */
+.btn {
+  display: inline-block;
+  font-family: 'STIX Two Text', serif;
+  font-weight: 400;
+  border-radius: 9999px;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.3s ease;
+  text-align: center;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+.btn--primary {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  padding: 1rem 2.5rem;
+}
+
+.btn--small {
+  font-size: 0.875rem;
+  padding: 0.875rem 2rem;
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   Shared: Divider
+   -------------------------------------------------------------------------- */
+.divider {
+  width: 3rem;
+  height: 1px;
+  background-color: hsl(var(--florine-dark-brown) / 0.3);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* --------------------------------------------------------------------------
+   Hero Section
+   -------------------------------------------------------------------------- */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-color set via inline style from theme editor */
+  overflow: hidden;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 10;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  padding: 5rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .hero__content {
+    padding: 7rem 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero__content {
+    padding: 8rem 6rem;
+  }
+}
+
+.hero__logo {
+  height: 8rem;
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .hero__logo {
+    height: 10rem;
+  }
+}
+
+.hero__title {
+  font-size: 2.25rem;
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .hero__title {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero__title {
+    font-size: 3.75rem;
+  }
+}
+
+.hero__subtitle {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 1.125rem;
+  color: hsl(var(--florine-dark-brown));
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+@media (min-width: 768px) {
+  .hero__subtitle {
+    font-size: 1.25rem;
+  }
+}
+
+.hero__description {
+  max-width: 36rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2.5rem;
+}
+
+.hero__description p {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: hsl(var(--foreground) / 0.8);
+}
+
+.hero__description p + p {
+  margin-top: 1rem;
+}
+
+.hero__cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.hero__cta-note {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  color: hsl(var(--florine-dark-brown));
+  font-weight: 300;
+  font-style: italic;
+}
+
+/* --------------------------------------------------------------------------
+   Philosophy Section
+   -------------------------------------------------------------------------- */
+.philosophy {
+  /* background-color set via inline style from theme editor */
+}
+
+.philosophy__inner {
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.philosophy__title {
+  font-size: 1.875rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .philosophy__title {
+    font-size: 2.25rem;
+  }
+}
+
+.philosophy__text {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: hsl(var(--foreground) / 0.8);
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .philosophy__text {
+    font-size: 1.125rem;
+  }
+}
+
+.philosophy__text:last-of-type {
+  margin-bottom: 2rem;
+}
+
+.philosophy__divider {
+  margin-bottom: 2rem;
+}
+
+.philosophy__quote {
+  font-family: 'STIX Two Text', serif;
+  font-size: 1.25rem;
+  font-style: italic;
+  color: hsl(var(--foreground) / 0.7);
+}
+
+.philosophy__quote + .philosophy__quote {
+  margin-top: 0.25rem;
+}
+
+@media (min-width: 768px) {
+  .philosophy__quote {
+    font-size: 1.5rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Principles Section
+   -------------------------------------------------------------------------- */
+.principles {
+  /* background-color set via inline style from theme editor */
+}
+
+.principles__inner {
+  max-width: 64rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.principles__title {
+  font-size: 1.875rem;
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+@media (min-width: 768px) {
+  .principles__title {
+    font-size: 2.25rem;
+  }
+}
+
+.principles__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+@media (min-width: 640px) {
+  .principles__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .principles__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+}
+
+.principles__card {
+  text-align: center;
+}
+
+.principles__icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  color: hsl(var(--primary));
+}
+
+.principles__icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.principles__card-title {
+  font-family: 'STIX Two Text', serif;
+  font-size: 1.125rem;
+  margin-bottom: 0.75rem;
+}
+
+.principles__card-description {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: hsl(var(--foreground) / 0.7);
+}
+
+/* --------------------------------------------------------------------------
+   Emotional Section
+   -------------------------------------------------------------------------- */
+.emotional {
+  /* background-color set via inline style from theme editor */
+}
+
+.emotional__inner {
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.emotional__title {
+  font-size: 1.875rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .emotional__title {
+    font-size: 2.25rem;
+  }
+}
+
+.emotional__intro {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: hsl(var(--accent-foreground) / 0.8);
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .emotional__intro {
+    font-size: 1.125rem;
+  }
+}
+
+.emotional__list {
+  margin-bottom: 2.5rem;
+}
+
+.emotional__item {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  color: hsl(var(--accent-foreground) / 0.8);
+  padding: 0.5rem 0;
+}
+
+@media (min-width: 768px) {
+  .emotional__item {
+    font-size: 1.125rem;
+  }
+}
+
+.emotional__divider {
+  margin-bottom: 2rem;
+}
+
+.emotional__closing {
+  font-family: 'STIX Two Text', serif;
+  font-size: 1.25rem;
+  font-style: italic;
+  color: hsl(var(--accent-foreground) / 0.7);
+}
+
+@media (min-width: 768px) {
+  .emotional__closing {
+    font-size: 1.5rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Waitlist Section
+   -------------------------------------------------------------------------- */
+.waitlist {
+  /* background-color set via inline style from theme editor */
+}
+
+.waitlist__inner {
+  max-width: 36rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.waitlist__title {
+  font-size: 1.875rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .waitlist__title {
+    font-size: 2.25rem;
+  }
+}
+
+.waitlist__subtitle {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: hsl(var(--muted-foreground));
+  margin-bottom: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .waitlist__subtitle {
+    font-size: 1.125rem;
+  }
+}
+
+.waitlist__form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .waitlist__form-row {
+    flex-direction: row;
+  }
+}
+
+.waitlist__input {
+  width: 100%;
+  max-width: 18rem;
+  padding: 0.875rem 1.25rem;
+  border-radius: 9999px;
+  background-color: hsl(var(--background) / 0.7);
+  border: 1px solid hsl(var(--border));
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 0.875rem;
+  color: hsl(var(--foreground));
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.waitlist__input::placeholder {
+  color: hsl(var(--foreground) / 0.4);
+}
+
+.waitlist__input:focus {
+  box-shadow: 0 0 0 1px hsl(var(--primary));
+}
+
+.waitlist__note {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  color: hsl(var(--foreground) / 0.5);
+  margin-top: 1rem;
+  font-style: italic;
+}
+
+.waitlist__error {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  color: #c0392b;
+  margin-top: 0.75rem;
+}
+
+.waitlist__success-title {
+  font-family: 'STIX Two Text', serif;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.waitlist__success-message {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  color: hsl(var(--foreground) / 0.7);
+}
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+.footer {
+  /* background-color set via inline style from theme editor */
+  color: hsl(var(--florine-cream));
+  padding: 4rem 1.5rem 5rem;
+}
+
+@media (min-width: 768px) {
+  .footer {
+    padding: 5rem 3rem;
+  }
+}
+
+.footer__inner {
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.footer__logo {
+  height: 6rem;
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1.5rem;
+  filter: brightness(2) contrast(0.75);
+}
+
+.footer__social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  border: 1px solid hsl(var(--florine-cream) / 0.3);
+  color: hsl(var(--florine-cream) / 0.7);
+  transition: all 0.3s ease;
+  margin-bottom: 2.5rem;
+}
+
+.footer__social-link:hover {
+  color: hsl(var(--florine-cream));
+  border-color: hsl(var(--florine-cream) / 0.6);
+}
+
+.footer__social-link svg {
+  width: 18px;
+  height: 18px;
+}
+
+.footer__tagline {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: hsl(var(--florine-cream) / 0.7);
+  max-width: 28rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2rem;
+}
+
+.footer__divider {
+  width: 3rem;
+  height: 1px;
+  background-color: hsl(var(--florine-cream) / 0.2);
+  margin: 0 auto 1.5rem;
+}
+
+.footer__copyright {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  color: hsl(var(--florine-cream) / 0.4);
+}
+
+/* --------------------------------------------------------------------------
+   Animation Classes
+   -------------------------------------------------------------------------- */
+
+/* Scroll-triggered fade up (used by philosophy, principles, emotional, waitlist) */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered children (principles cards) */
+.animate-on-scroll-child {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll-child.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Slide from left (emotional list items) */
+.animate-slide-left {
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.animate-slide-left.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Hero fade in (page-load staggered, longer duration) */
+.hero-fade {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.hero-fade.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero logo (fade only, no translate) */
+.hero-logo-fade {
+  opacity: 0;
+  transition: opacity 1s ease-out;
+}
+
+.hero-logo-fade.is-visible {
+  opacity: 1;
+}
+
+/* Waitlist success state */
+.waitlist-success {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+.waitlist-success.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* --------------------------------------------------------------------------
+   Accessibility: Reduced Motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .animate-on-scroll,
+  .animate-on-scroll-child,
+  .animate-slide-left,
+  .hero-fade,
+  .hero-logo-fade,
+  .waitlist-success {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

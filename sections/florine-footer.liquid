@@ -1,0 +1,77 @@
+<footer class="footer" style="background-color: {{ section.settings.background_color }};">
+  <div class="footer__inner">
+    {% if section.settings.logo != blank %}
+      <img
+        src="{{ section.settings.logo | image_url: width: 400 }}"
+        alt="{{ shop.name }}"
+        class="footer__logo"
+        loading="lazy"
+      />
+    {% else %}
+      <img
+        src="{{ 'florine-logo.png' | asset_url }}"
+        alt="{{ shop.name }}"
+        class="footer__logo"
+        loading="lazy"
+      />
+    {% endif %}
+
+    {% if section.settings.instagram_url != blank %}
+      <a
+        href="{{ section.settings.instagram_url }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Follow {{ shop.name }} on Instagram"
+        class="footer__social-link"
+      >
+        {% render 'icon-instagram' %}
+      </a>
+    {% endif %}
+
+    {% if section.settings.tagline != blank %}
+      <p class="footer__tagline">{{ section.settings.tagline }}</p>
+    {% endif %}
+
+    <div class="footer__divider"></div>
+
+    <p class="footer__copyright">
+      &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.
+    </p>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#8A8074"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL",
+      "default": "https://instagram.com"
+    },
+    {
+      "type": "textarea",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Swimwear that lets women feel comfortable, confident, and quietly beautiful -- just as they are."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer"
+    }
+  ]
+}
+{% endschema %}

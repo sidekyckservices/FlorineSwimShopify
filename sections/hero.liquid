@@ -1,0 +1,112 @@
+<section class="hero" style="background-color: {{ section.settings.background_color }};{% if section.settings.background_image != blank %} background-image: url('{{ section.settings.background_image | image_url: width: 1920 }}'); background-size: cover; background-position: center;{% endif %}">
+  <div class="hero__content">
+    <div class="hero-logo-fade" data-delay="0.2">
+      {% if section.settings.logo != blank %}
+        <img
+          src="{{ section.settings.logo | image_url: width: 400 }}"
+          alt="{{ shop.name }}"
+          class="hero__logo"
+          loading="eager"
+        />
+      {% else %}
+        <img
+          src="{{ 'florine-logo.png' | asset_url }}"
+          alt="{{ shop.name }}"
+          class="hero__logo"
+          loading="eager"
+        />
+      {% endif %}
+    </div>
+
+    <h1 class="hero__title hero-fade" data-delay="0.4">
+      {{ section.settings.heading }}
+    </h1>
+
+    <p class="hero__subtitle hero-fade" data-delay="0.6">
+      {{ section.settings.subheading }}
+    </p>
+
+    <div class="hero__description hero-fade" data-delay="0.8">
+      {% if section.settings.description_1 != blank %}
+        <p>{{ section.settings.description_1 }}</p>
+      {% endif %}
+      {% if section.settings.description_2 != blank %}
+        <p>{{ section.settings.description_2 }}</p>
+      {% endif %}
+    </div>
+
+    <div class="hero__cta hero-fade" data-delay="1.0">
+      <a href="#waitlist" class="btn btn--primary">
+        {{ section.settings.button_text }}
+      </a>
+      <span class="hero__cta-note">
+        {{ section.settings.button_note }}
+      </span>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FBF7F3"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Swimwear For Everywhere."
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Modern two-piece swimwear designed for calm, confident days by the water."
+    },
+    {
+      "type": "textarea",
+      "id": "description_1",
+      "label": "Description Paragraph 1",
+      "default": "Florine Swim is creating thoughtfully designed swimwear for women who want to feel comfortable, supported, and quietly beautiful -- without adjusting, hiding, or second-guessing."
+    },
+    {
+      "type": "textarea",
+      "id": "description_2",
+      "label": "Description Paragraph 2",
+      "default": "Because when you feel at ease, confidence follows naturally."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Join the Waitlist"
+    },
+    {
+      "type": "text",
+      "id": "button_note",
+      "label": "Button Note",
+      "default": "Launching soon. Be gently notified."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero"
+    }
+  ]
+}
+{% endschema %}

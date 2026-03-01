@@ -1,0 +1,112 @@
+<section id="waitlist" class="waitlist section-padding"
+  style="background-color: {{ section.settings.background_color }};{% if section.settings.background_image != blank %} background-image: url('{{ section.settings.background_image | image_url: width: 1920 }}'); background-size: cover; background-position: center;{% endif %}">
+  <div class="waitlist__inner animate-on-scroll">
+    <h2 class="waitlist__title">{{ section.settings.heading }}</h2>
+
+    <p class="waitlist__subtitle">
+      {{ section.settings.description }}
+    </p>
+
+    {% form 'customer', id: 'waitlist-form' %}
+      {% if form.posted_successfully? %}
+        <div class="waitlist-success">
+          <p class="waitlist__success-title">{{ section.settings.success_title }}</p>
+          <p class="waitlist__success-message">{{ section.settings.success_message }}</p>
+        </div>
+      {% else %}
+        <input type="hidden" name="contact[tags]" value="waitlist" />
+        <input type="hidden" name="contact[accepts_marketing]" value="true" />
+
+        <div class="waitlist__form-row">
+          <input
+            type="email"
+            name="contact[email]"
+            placeholder="{{ section.settings.placeholder_text }}"
+            required
+            class="waitlist__input"
+            autocomplete="email"
+            aria-label="Email address"
+          />
+          <button type="submit" class="btn btn--primary btn--small">
+            {{ section.settings.button_text }}
+          </button>
+        </div>
+
+        {% if form.errors %}
+          <p class="waitlist__error">
+            {{ form.errors.translated_fields['email'] | capitalize }}
+            {{ form.errors.messages['email'] }}
+          </p>
+        {% endif %}
+
+        <p class="waitlist__note">{{ section.settings.note_text }}</p>
+      {% endif %}
+    {% endform %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Waitlist",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#CFC3B7"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Be the First to Experience Florine."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "We are preparing something thoughtful and beautiful. Join our list, and we'll reach out when our first collection is ready."
+    },
+    {
+      "type": "text",
+      "id": "placeholder_text",
+      "label": "Email Placeholder",
+      "default": "Your email address"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Notify Me"
+    },
+    {
+      "type": "text",
+      "id": "note_text",
+      "label": "Note Text",
+      "default": "No urgency. Just a gentle hello when the time comes."
+    },
+    {
+      "type": "text",
+      "id": "success_title",
+      "label": "Success Title",
+      "default": "Thank you."
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success Message",
+      "default": "We'll be in touch -- gently."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Waitlist"
+    }
+  ]
+}
+{% endschema %}

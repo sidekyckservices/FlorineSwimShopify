@@ -1,0 +1,116 @@
+<section class="emotional section-padding"
+  style="background-color: {{ section.settings.background_color }};{% if section.settings.background_image != blank %} background-image: url('{{ section.settings.background_image | image_url: width: 1920 }}'); background-size: cover; background-position: center;{% endif %}">
+  <div class="emotional__inner animate-on-scroll">
+    <h2 class="emotional__title">{{ section.settings.heading }}</h2>
+
+    <p class="emotional__intro">{{ section.settings.intro_text }}</p>
+
+    <ul class="emotional__list">
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          {% assign delay_ms = forloop.index0 | times: 120 %}
+          {% assign delay_s = delay_ms | divided_by: 1000.0 %}
+          <li
+            class="emotional__item animate-slide-left"
+            data-delay="{{ delay_s }}"
+            style="transition-delay: {{ delay_s }}s;"
+            {{ block.shopify_attributes }}
+          >
+            &bull; {{ block.settings.text }}
+          </li>
+        {% endfor %}
+      {% else %}
+        <li class="emotional__item animate-slide-left" data-delay="0" style="transition-delay: 0s;">&bull; Comfortable from the first wear</li>
+        <li class="emotional__item animate-slide-left" data-delay="0.12" style="transition-delay: 0.12s;">&bull; Secure without being restrictive</li>
+        <li class="emotional__item animate-slide-left" data-delay="0.24" style="transition-delay: 0.24s;">&bull; Beautiful without trying too hard</li>
+        <li class="emotional__item animate-slide-left" data-delay="0.36" style="transition-delay: 0.36s;">&bull; Free to enjoy the moment</li>
+      {% endif %}
+    </ul>
+
+    <div class="divider emotional__divider"></div>
+
+    <p class="emotional__closing">{{ section.settings.closing_quote }}</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Emotional",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#D8C3A5"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "How It Should Feel."
+    },
+    {
+      "type": "textarea",
+      "id": "intro_text",
+      "label": "Intro Text",
+      "default": "When you slip into Florine, we hope you feel:"
+    },
+    {
+      "type": "text",
+      "id": "closing_quote",
+      "label": "Closing Quote",
+      "default": "Florine is swimwear you can trust."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feeling",
+      "name": "Feeling",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Feeling Text",
+          "default": "A feeling"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Emotional",
+      "blocks": [
+        {
+          "type": "feeling",
+          "settings": {
+            "text": "Comfortable from the first wear"
+          }
+        },
+        {
+          "type": "feeling",
+          "settings": {
+            "text": "Secure without being restrictive"
+          }
+        },
+        {
+          "type": "feeling",
+          "settings": {
+            "text": "Beautiful without trying too hard"
+          }
+        },
+        {
+          "type": "feeling",
+          "settings": {
+            "text": "Free to enjoy the moment"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
