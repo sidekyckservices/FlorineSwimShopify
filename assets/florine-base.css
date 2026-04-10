@@ -83,7 +83,13 @@ ul {
    Shared: Section Padding
    -------------------------------------------------------------------------- */
 .section-padding {
-  padding: 5rem 1.5rem;
+  padding: 3.5rem 1.5rem;
+}
+
+@media (min-width: 480px) {
+  .section-padding {
+    padding: 4rem 2rem;
+  }
 }
 
 @media (min-width: 768px) {
@@ -301,26 +307,47 @@ ul {
   display: flex;
   flex-direction: column;
   gap: 0;
-  margin-top: 3rem;
+  margin-top: 1rem;
   align-items: center;
   overflow: hidden;
 }
 
 .philosophy__product-img {
   width: 100%;
-  max-width: 100%;
+  max-width: 18rem;
   height: auto;
   object-fit: contain;
-  margin-top: -8rem;
-  margin-bottom: -8rem;
+  margin-top: -3rem;
+  margin-bottom: -3rem;
 }
 
 .philosophy__product-img:first-child {
-  margin-top: -5rem;
+  margin-top: -2rem;
 }
 
 .philosophy__product-img:last-child {
-  margin-bottom: -5rem;
+  margin-bottom: -2rem;
+}
+
+@media (min-width: 768px) {
+  .philosophy__images {
+    gap: 0;
+    overflow: hidden;
+  }
+
+  .philosophy__product-img {
+    max-width: 100%;
+    margin-top: -8rem;
+    margin-bottom: -8rem;
+  }
+
+  .philosophy__product-img:first-child {
+    margin-top: -5rem;
+  }
+
+  .philosophy__product-img:last-child {
+    margin-bottom: -5rem;
+  }
 }
 
 .philosophy__title {

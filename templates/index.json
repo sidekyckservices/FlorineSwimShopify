@@ -1,11 +1,89 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "hero": { "type": "hero" },
-    "philosophy": { "type": "philosophy" },
-    "principles": { "type": "principles" },
-    "emotional": { "type": "emotional" },
-    "brand-story": { "type": "brand-story" },
-    "waitlist": { "type": "waitlist" }
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "background_color": "#fbf7f3",
+        "heading": "Swimwear for everywhere.",
+        "subheading": "Designed for water. Made for everything around it.",
+        "description_1": "Most swimwear is made for escape. Florine is made for real life —the conversations after the swim, the slow mornings, the full days that don't pause just because you're near the water.",
+        "description_2": "Created so you can move, sit, laugh, and live —without adjusting, hiding, or second-guessing.",
+        "button_text": "Be part of the beginning.",
+        "button_note": "We'll send a note when Florine arrives."
+      }
+    },
+    "philosophy": {
+      "type": "philosophy",
+      "settings": {
+        "background_color": "#e6ded3",
+        "heading": "Designed for Real Life.",
+        "paragraph_1": "Pool days that turn into errands. Beach walks that become long conversations. Family vacations, slow mornings, and everything in between.",
+        "paragraph_2": "Florine Swim is made for the moments that matter.",
+        "paragraph_3": "Each piece is created with thoughtful coverage and gentle support, so nothing pulls, shifts, or distracts you from being present.",
+        "quote_line_1": "You are already enough.",
+        "quote_line_2": "We simply design swimwear that lets you feel it.",
+        "product_image_1": "shopify://shop_images/Florine_Swim_Website-01.png",
+        "product_image_1_alt": "Florine Swim crop top",
+        "product_image_2": "shopify://shop_images/Florine_Swim_Website-02.png",
+        "product_image_2_alt": "Florine Swim shorts"
+      }
+    },
+    "principles": {
+      "type": "principles",
+      "settings": {
+        "background_color": "#fbf7f3",
+        "heading": "So you can just be there."
+      }
+    },
+    "emotional": {
+      "type": "emotional",
+      "settings": {
+        "background_color": "#d8c3a5",
+        "heading": "How It Should Feel.",
+        "intro_text": "When you slip into Florine, you stop thinking about how everything fits.",
+        "closing_quote": "Florine is swimwear you can trust."
+      }
+    },
+    "brand-story": {
+      "type": "brand-story",
+      "settings": {
+        "background_color": "#fbf7f3",
+        "heading": "Why Florine?",
+        "paragraph_1": "Florine Swim is named after my grandmother —a woman who carried quiet confidence wherever she went.",
+        "paragraph_2": "She raised fourteen children and lived a life full of movement, care, and constant presence for others. Yet she carried herself with a calm strength and natural grace that never asked for attention.",
+        "paragraph_3": "As I have grown older, I realize how rare it is to find swimwear that allows women to feel that same ease —pieces that support real life instead of distracting from it.",
+        "paragraph_4": "Florine was created to offer something different: swimwear designed for presence."
+      }
+    },
+    "waitlist": {
+      "type": "waitlist",
+      "settings": {
+        "background_color": "#cfc3b7",
+        "heading": "Be part of the beginning.",
+        "description": "We're preparing something thoughtful and lasting. Leave your email, and we'll be in touch when the first collection arrives.",
+        "placeholder_text": "Your email address",
+        "button_text": "Experience Florine First",
+        "note_text": "No urgency. Just a gentle hello when the time comes.",
+        "success_title": "Thank you.",
+        "success_message": "We'll be in touch —gently."
+      }
+    }
   },
-  "order": ["hero", "philosophy", "principles", "emotional", "brand-story", "waitlist"]
+  "order": [
+    "hero",
+    "philosophy",
+    "principles",
+    "emotional",
+    "brand-story",
+    "waitlist"
+  ]
 }
