@@ -271,6 +271,58 @@ ul {
   text-align: center;
 }
 
+/* Two-column layout */
+.philosophy__two-col {
+  max-width: 64rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+@media (min-width: 768px) {
+  .philosophy__two-col {
+    display: grid;
+    grid-template-columns: 55% 40%;
+    gap: 5%;
+    align-items: center;
+  }
+
+  .philosophy__images {
+    margin-top: 0;
+    align-self: center;
+  }
+}
+
+.philosophy__content {
+  /* Text column */
+}
+
+.philosophy__images {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 3rem;
+  align-items: center;
+  overflow: hidden;
+}
+
+.philosophy__product-img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  margin-top: -8rem;
+  margin-bottom: -8rem;
+}
+
+.philosophy__product-img:first-child {
+  margin-top: -5rem;
+}
+
+.philosophy__product-img:last-child {
+  margin-bottom: -5rem;
+}
+
 .philosophy__title {
   font-size: 1.875rem;
   margin-bottom: 2rem;
@@ -320,6 +372,50 @@ ul {
   .philosophy__quote {
     font-size: 1.5rem;
   }
+}
+
+/* --------------------------------------------------------------------------
+   Brand Story Section
+   -------------------------------------------------------------------------- */
+.brand-story {
+  /* background-color set via inline style from theme editor */
+}
+
+.brand-story__inner {
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.brand-story__title {
+  font-size: 1.875rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .brand-story__title {
+    font-size: 2.25rem;
+  }
+}
+
+.brand-story__text {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: hsl(var(--foreground) / 0.8);
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .brand-story__text {
+    font-size: 1.125rem;
+  }
+}
+
+.brand-story__text:last-of-type {
+  margin-bottom: 0;
 }
 
 /* --------------------------------------------------------------------------

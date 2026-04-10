@@ -1,6 +1,11 @@
 {
   "sections": {
-    "hero": { "type": "hero" }
+    "hero": { "type": "hero" },
+    "philosophy": { "type": "philosophy" },
+    "principles": { "type": "principles" },
+    "emotional": { "type": "emotional" },
+    "brand-story": { "type": "brand-story" },
+    "waitlist": { "type": "waitlist" }
   },
-  "order": ["hero"]
+  "order": ["hero", "philosophy", "principles", "emotional", "brand-story", "waitlist"]
 }

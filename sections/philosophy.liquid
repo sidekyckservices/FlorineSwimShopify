@@ -1,28 +1,51 @@
 <section class="philosophy section-padding"
   style="background-color: {{ section.settings.background_color }};{% if section.settings.background_image != blank %} background-image: url('{{ section.settings.background_image | image_url: width: 1920 }}'); background-size: cover; background-position: center;{% endif %}">
-  <div class="philosophy__inner animate-on-scroll">
-    <h2 class="philosophy__title">{{ section.settings.heading }}</h2>
+  <div class="philosophy__inner philosophy__two-col animate-on-scroll">
+    <div class="philosophy__content">
+      <h2 class="philosophy__title">{{ section.settings.heading }}</h2>
 
-    {% if section.settings.paragraph_1 != blank %}
-      <p class="philosophy__text">{{ section.settings.paragraph_1 }}</p>
-    {% endif %}
+      {% if section.settings.paragraph_1 != blank %}
+        <p class="philosophy__text">{{ section.settings.paragraph_1 }}</p>
+      {% endif %}
 
-    {% if section.settings.paragraph_2 != blank %}
-      <p class="philosophy__text">{{ section.settings.paragraph_2 }}</p>
-    {% endif %}
+      {% if section.settings.paragraph_2 != blank %}
+        <p class="philosophy__text">{{ section.settings.paragraph_2 }}</p>
+      {% endif %}
 
-    {% if section.settings.paragraph_3 != blank %}
-      <p class="philosophy__text">{{ section.settings.paragraph_3 }}</p>
-    {% endif %}
+      {% if section.settings.paragraph_3 != blank %}
+        <p class="philosophy__text">{{ section.settings.paragraph_3 }}</p>
+      {% endif %}
 
-    <div class="divider philosophy__divider"></div>
+      <div class="divider philosophy__divider"></div>
 
-    {% if section.settings.quote_line_1 != blank %}
-      <p class="philosophy__quote">{{ section.settings.quote_line_1 }}</p>
-    {% endif %}
+      {% if section.settings.quote_line_1 != blank %}
+        <p class="philosophy__quote">{{ section.settings.quote_line_1 }}</p>
+      {% endif %}
 
-    {% if section.settings.quote_line_2 != blank %}
-      <p class="philosophy__quote">{{ section.settings.quote_line_2 }}</p>
+      {% if section.settings.quote_line_2 != blank %}
+        <p class="philosophy__quote">{{ section.settings.quote_line_2 }}</p>
+      {% endif %}
+    </div>
+
+    {% if section.settings.product_image_1 != blank or section.settings.product_image_2 != blank %}
+      <div class="philosophy__images">
+        {% if section.settings.product_image_1 != blank %}
+          <img
+            src="{{ section.settings.product_image_1 | image_url: width: 800 }}"
+            alt="{{ section.settings.product_image_1_alt | default: 'Florine Swim product' }}"
+            class="philosophy__product-img"
+            loading="lazy"
+          />
+        {% endif %}
+        {% if section.settings.product_image_2 != blank %}
+          <img
+            src="{{ section.settings.product_image_2 | image_url: width: 800 }}"
+            alt="{{ section.settings.product_image_2_alt | default: 'Florine Swim product' }}"
+            class="philosophy__product-img"
+            loading="lazy"
+          />
+        {% endif %}
+      </div>
     {% endif %}
   </div>
 </section>
@@ -52,13 +75,13 @@
       "type": "textarea",
       "id": "paragraph_1",
       "label": "Paragraph 1",
-      "default": "Pool days. Beach walks. Family vacations. Slow mornings near the water."
+      "default": "Pool days that turn into errands. Beach walks that become long conversations. Family vacations, slow mornings, and everything in between."
     },
     {
       "type": "textarea",
       "id": "paragraph_2",
       "label": "Paragraph 2",
-      "default": "Florine Swim is made for the moments that matter -- not the mirror."
+      "default": "Florine Swim is made for the moments that matter."
     },
     {
       "type": "textarea",
@@ -77,6 +100,28 @@
       "id": "quote_line_2",
       "label": "Quote Line 2",
       "default": "We simply design swimwear that lets you feel it."
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image_1",
+      "label": "Product Image 1"
+    },
+    {
+      "type": "text",
+      "id": "product_image_1_alt",
+      "label": "Product Image 1 Alt Text",
+      "default": "Florine Swim crop top"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image_2",
+      "label": "Product Image 2"
+    },
+    {
+      "type": "text",
+      "id": "product_image_2_alt",
+      "label": "Product Image 2 Alt Text",
+      "default": "Florine Swim shorts"
     }
   ],
   "presets": [
