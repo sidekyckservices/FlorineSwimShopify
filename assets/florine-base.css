@@ -307,32 +307,32 @@ ul {
   display: flex;
   flex-direction: column;
   gap: 0;
-  margin-top: 1rem;
+  margin-top: 2rem;
   align-items: center;
-  overflow: hidden;
 }
 
 .philosophy__product-img {
   width: 100%;
-  max-width: 18rem;
+  max-width: 16rem;
   height: auto;
   object-fit: contain;
-  margin-top: -3rem;
-  margin-bottom: -3rem;
+  margin-top: -1rem;
+  margin-bottom: -1rem;
 }
 
 .philosophy__product-img:first-child {
-  margin-top: -2rem;
+  margin-top: 0;
 }
 
 .philosophy__product-img:last-child {
-  margin-bottom: -2rem;
+  margin-bottom: 0;
 }
 
 @media (min-width: 768px) {
   .philosophy__images {
     gap: 0;
     overflow: hidden;
+    margin-top: 0;
   }
 
   .philosophy__product-img {
