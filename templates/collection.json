@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-collection",
+      "settings": {
+        "eyebrow": "The Collection",
+        "heading": "Shop Florine.",
+        "description": "A small, considered first chapter. More pieces — including our debut swim collection — arriving soon.",
+        "show_coming_soon": true,
+        "coming_soon_eyebrow": "Coming Soon",
+        "coming_soon_title": "The First Swim Collection",
+        "coming_soon_note": "Be the first to know."
+      }
+    }
+  },
+  "order": ["main"]
+}

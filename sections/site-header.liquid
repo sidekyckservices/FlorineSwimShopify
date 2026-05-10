@@ -1,0 +1,139 @@
+{%- liquid
+  assign nav_link_1_url = section.settings.nav_link_1_url
+  if nav_link_1_url == blank
+    assign nav_link_1_url = routes.root_url
+  endif
+
+  assign nav_link_2_url = section.settings.nav_link_2_url
+  if nav_link_2_url == blank
+    assign nav_link_2_url = '/collections/all'
+  endif
+
+  assign nav_link_3_url = section.settings.nav_link_3_url
+  if nav_link_3_url == blank
+    assign nav_link_3_url = '/#waitlist'
+  endif
+-%}
+
+<header class="site-header" data-site-header>
+  <div class="site-header__inner">
+    <nav class="site-header__nav site-header__nav--left" aria-label="Primary">
+      {% if section.settings.nav_link_1_label != blank %}
+        <a href="{{ nav_link_1_url }}" class="site-header__link {% if request.page_type == 'index' %}is-active{% endif %}">{{ section.settings.nav_link_1_label }}</a>
+      {% endif %}
+      {% if section.settings.nav_link_2_label != blank %}
+        <a href="{{ nav_link_2_url }}" class="site-header__link {% if request.page_type contains 'collection' or request.page_type contains 'product' %}is-active{% endif %}">{{ section.settings.nav_link_2_label }}</a>
+      {% endif %}
+      {% if section.settings.nav_link_3_label != blank %}
+        <a href="{{ nav_link_3_url }}" class="site-header__link">{{ section.settings.nav_link_3_label }}</a>
+      {% endif %}
+    </nav>
+
+    <a href="{{ routes.root_url }}" class="site-header__brand" aria-label="{{ shop.name }} home">
+      {% if section.settings.logo != blank %}
+        <img
+          src="{{ section.settings.logo | image_url: width: 240 }}"
+          alt="{{ shop.name }}"
+          class="site-header__logo"
+          width="120"
+          height="48"
+          loading="eager"
+        />
+      {% else %}
+        <img
+          src="{{ 'florine-logo.jpg' | asset_url }}"
+          alt="{{ shop.name }}"
+          class="site-header__logo"
+          loading="eager"
+        />
+      {% endif %}
+    </a>
+
+    <div class="site-header__nav site-header__nav--right">
+      {% if section.settings.mobile_link_label != blank %}
+        <a href="{{ nav_link_2_url }}" class="site-header__link site-header__link--mobile">{{ section.settings.mobile_link_label }}</a>
+      {% endif %}
+      {% if section.settings.show_cart %}
+        <a
+          href="{{ routes.cart_url }}"
+          class="site-header__cart"
+          aria-label="Cart"
+          data-open-cart-drawer
+        >
+          {%- render 'icon-bag' -%}
+          <span
+            class="site-header__cart-count"
+            data-cart-count
+            {% if cart.item_count == 0 %}hidden{% endif %}
+          >{{ cart.item_count }}</span>
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Site Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo (defaults to florine-logo.jpg)"
+    },
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "text",
+      "id": "nav_link_1_label",
+      "label": "Link 1 Label",
+      "default": "Home"
+    },
+    {
+      "type": "url",
+      "id": "nav_link_1_url",
+      "label": "Link 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "nav_link_2_label",
+      "label": "Link 2 Label",
+      "default": "Shop"
+    },
+    {
+      "type": "url",
+      "id": "nav_link_2_url",
+      "label": "Link 2 URL"
+    },
+    {
+      "type": "text",
+      "id": "nav_link_3_label",
+      "label": "Link 3 Label",
+      "default": "Waitlist"
+    },
+    {
+      "type": "url",
+      "id": "nav_link_3_url",
+      "label": "Link 3 URL"
+    },
+    {
+      "type": "header",
+      "content": "Mobile / Cart"
+    },
+    {
+      "type": "text",
+      "id": "mobile_link_label",
+      "label": "Mobile Quick Link Label",
+      "default": "Shop"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart",
+      "label": "Show cart icon",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

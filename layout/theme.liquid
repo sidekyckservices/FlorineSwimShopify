@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ page_title }}{% if page_title != shop.name %} | {{ shop.name }}{% endif %}</title>
-  <meta name="description" content="{{ page_description | default: 'Designed for water. Made for everything around it.' }}">
+  <meta name="description" content="{{ page_description | default: 'Modern two-piece swimwear designed for calm, confident days by the water.' }}">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="{{ page_title }}">
-  <meta property="og:description" content="{{ page_description | default: 'Designed for water. Made for everything around it.' }}">
+  <meta property="og:description" content="{{ page_description | default: 'Modern two-piece swimwear designed for calm, confident days by the water.' }}">
   <meta property="og:site_name" content="{{ shop.name }}">
 
   <!-- Favicon -->
@@ -26,11 +26,19 @@
 
   {{ content_for_header }}
 </head>
-<body>
-  {{ content_for_layout }}
+<body class="template-{{ template | replace: '.', '-' | handle }}">
+  {% section 'site-header' %}
 
-  {% section 'florine-footer' %}
+  <main id="main" role="main">
+    {{ content_for_layout }}
+  </main>
+
+  {% section 'footer' %}
+
+  {% section 'cart-drawer' %}
 
   <script src="{{ 'florine-animations.js' | asset_url }}" defer></script>
+  <script src="{{ 'florine-product.js' | asset_url }}" defer></script>
+  <script src="{{ 'florine-cart.js' | asset_url }}" defer></script>
 </body>
 </html>

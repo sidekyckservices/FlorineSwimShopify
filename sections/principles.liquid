@@ -1,78 +1,33 @@
-<section class="principles section-padding"
-  style="background-color: {{ section.settings.background_color }};{% if section.settings.background_image != blank %} background-image: url('{{ section.settings.background_image | image_url: width: 1920 }}'); background-size: cover; background-position: center;{% endif %}">
+<section class="principles section-padding">
   <div class="principles__inner animate-on-scroll">
     <h2 class="principles__title">{{ section.settings.heading }}</h2>
 
     <div class="principles__grid">
-      {% if section.blocks.size > 0 %}
-        {% for block in section.blocks %}
-          {% assign delay_ms = forloop.index0 | times: 150 %}
-          {% assign delay_s = delay_ms | divided_by: 1000.0 %}
-          <div
-            class="principles__card animate-on-scroll-child"
-            data-delay="{{ delay_s }}"
-            style="transition-delay: {{ delay_s }}s;"
-            {{ block.shopify_attributes }}
-          >
-            <div class="principles__icon">
-              {% case block.settings.icon %}
-                {% when 'feather' %}{% render 'icon-feather' %}
-                {% when 'shield' %}{% render 'icon-shield' %}
-                {% when 'flower' %}{% render 'icon-flower' %}
-                {% when 'sun' %}{% render 'icon-sun' %}
-                {% when 'heart' %}{% render 'icon-heart' %}
-                {% when 'wave' %}{% render 'icon-wave' %}
-                {% when 'leaf' %}{% render 'icon-leaf' %}
-                {% when 'droplet' %}{% render 'icon-droplet' %}
-                {% when 'star' %}{% render 'icon-star' %}
-                {% when 'moon' %}{% render 'icon-moon' %}
-                {% when 'cloud' %}{% render 'icon-cloud' %}
-                {% when 'sparkle' %}{% render 'icon-sparkle' %}
-                {% when 'pearl' %}{% render 'icon-pearl' %}
-                {% when 'palm' %}{% render 'icon-palm' %}
-                {% when 'shell' %}{% render 'icon-shell' %}
-                {% when 'butterfly' %}{% render 'icon-butterfly' %}
-                {% when 'lotus' %}{% render 'icon-lotus' %}
-                {% when 'breeze' %}{% render 'icon-breeze' %}
-                {% when 'mountain' %}{% render 'icon-mountain' %}
-                {% when 'sunrise' %}{% render 'icon-sunrise' %}
-                {% when 'compass' %}{% render 'icon-compass' %}
-                {% when 'anchor' %}{% render 'icon-anchor' %}
-                {% when 'gem' %}{% render 'icon-gem' %}
-                {% when 'ribbon' %}{% render 'icon-ribbon' %}
-                {% when 'eye' %}{% render 'icon-eye' %}
-                {% when 'hand' %}{% render 'icon-hand' %}
-                {% when 'circle' %}{% render 'icon-circle' %}
-                {% when 'infinity' %}{% render 'icon-infinity' %}
-                {% when 'dove' %}{% render 'icon-dove' %}
-              {% endcase %}
-            </div>
-            <h3 class="principles__card-title">{{ block.settings.title }}</h3>
-            <p class="principles__card-description">{{ block.settings.description }}</p>
+      {% for block in section.blocks %}
+        {% assign delay_ms = forloop.index0 | times: 150 %}
+        {% assign delay_s = delay_ms | divided_by: 1000.0 %}
+        <div
+          class="principles__card animate-on-scroll-child"
+          data-delay="{{ delay_s }}"
+          style="transition-delay: {{ delay_s }}s;"
+          {{ block.shopify_attributes }}
+        >
+          <div class="principles__icon">
+            {% case block.settings.icon %}
+              {% when 'feather' %}
+                {% render 'icon-feather' %}
+              {% when 'shield' %}
+                {% render 'icon-shield' %}
+              {% when 'flower' %}
+                {% render 'icon-flower' %}
+              {% when 'sun' %}
+                {% render 'icon-sun' %}
+            {% endcase %}
           </div>
-        {% endfor %}
-      {% else %}
-        <div class="principles__card animate-on-scroll-child" data-delay="0" style="transition-delay: 0s;">
-          <div class="principles__icon">{% render 'icon-feather' %}</div>
-          <h3 class="principles__card-title">Ease Over Effort</h3>
-          <p class="principles__card-description">Designed so you can move, sit, and live your day without fixing or adjusting.</p>
+          <h3 class="principles__card-title">{{ block.settings.title }}</h3>
+          <p class="principles__card-description">{{ block.settings.description }}</p>
         </div>
-        <div class="principles__card animate-on-scroll-child" data-delay="0.15" style="transition-delay: 0.15s;">
-          <div class="principles__icon">{% render 'icon-shield' %}</div>
-          <h3 class="principles__card-title">Comfort You Can Trust</h3>
-          <p class="principles__card-description">Support that feels natural and secure, so you can forget about what you're wearing.</p>
-        </div>
-        <div class="principles__card animate-on-scroll-child" data-delay="0.3" style="transition-delay: 0.3s;">
-          <div class="principles__icon">{% render 'icon-flower' %}</div>
-          <h3 class="principles__card-title">Quiet Femininity</h3>
-          <p class="principles__card-description">Soft, polished silhouettes that feel beautiful without asking you to reveal more than you'd like.</p>
-        </div>
-        <div class="principles__card animate-on-scroll-child" data-delay="0.45" style="transition-delay: 0.45s;">
-          <div class="principles__icon">{% render 'icon-sun' %}</div>
-          <h3 class="principles__card-title">Presence in the Moment</h3>
-          <p class="principles__card-description">Created so your attention stays on connection, sunlight, and living —not your swimsuit.</p>
-        </div>
-      {% endif %}
+      {% endfor %}
     </div>
   </div>
 </section>
@@ -82,21 +37,10 @@
   "name": "Principles",
   "settings": [
     {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background Color",
-      "default": "#FBF7F3"
-    },
-    {
-      "type": "image_picker",
-      "id": "background_image",
-      "label": "Background Image"
-    },
-    {
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "So you can just be there."
+      "default": "Thoughtfully Considered."
     }
   ],
   "blocks": [
@@ -112,32 +56,7 @@
             { "value": "feather", "label": "Feather" },
             { "value": "shield", "label": "Shield" },
             { "value": "flower", "label": "Flower" },
-            { "value": "sun", "label": "Sun" },
-            { "value": "heart", "label": "Heart" },
-            { "value": "wave", "label": "Wave" },
-            { "value": "leaf", "label": "Leaf" },
-            { "value": "droplet", "label": "Droplet" },
-            { "value": "star", "label": "Star" },
-            { "value": "moon", "label": "Moon" },
-            { "value": "cloud", "label": "Cloud" },
-            { "value": "sparkle", "label": "Sparkle" },
-            { "value": "pearl", "label": "Pearl" },
-            { "value": "palm", "label": "Palm Tree" },
-            { "value": "shell", "label": "Shell" },
-            { "value": "butterfly", "label": "Butterfly" },
-            { "value": "lotus", "label": "Lotus" },
-            { "value": "breeze", "label": "Breeze" },
-            { "value": "mountain", "label": "Mountain" },
-            { "value": "sunrise", "label": "Sunrise" },
-            { "value": "compass", "label": "Compass" },
-            { "value": "anchor", "label": "Anchor" },
-            { "value": "gem", "label": "Gem" },
-            { "value": "ribbon", "label": "Ribbon" },
-            { "value": "eye", "label": "Eye" },
-            { "value": "hand", "label": "Hand" },
-            { "value": "circle", "label": "Circle" },
-            { "value": "infinity", "label": "Infinity" },
-            { "value": "dove", "label": "Dove" }
+            { "value": "sun", "label": "Sun" }
           ],
           "default": "feather"
         },
@@ -165,7 +84,7 @@
           "settings": {
             "icon": "feather",
             "title": "Ease Over Effort",
-            "description": "Designed so you can move, sit, and live your day without fixing or adjusting."
+            "description": "Swimwear designed so nothing needs fixing or adjusting."
           }
         },
         {
@@ -173,7 +92,7 @@
           "settings": {
             "icon": "shield",
             "title": "Comfort You Can Trust",
-            "description": "Support that feels natural and secure, so you can forget about what you're wearing."
+            "description": "Support that feels natural, never restrictive."
           }
         },
         {
@@ -181,7 +100,7 @@
           "settings": {
             "icon": "flower",
             "title": "Quiet Femininity",
-            "description": "Soft, polished silhouettes that feel beautiful without asking you to reveal more than you'd like."
+            "description": "Soft, polished silhouettes that feel beautiful without revealing more than you'd like."
           }
         },
         {
@@ -189,7 +108,7 @@
           "settings": {
             "icon": "sun",
             "title": "Presence in the Moment",
-            "description": "Created so your attention stays on connection, sunlight, and living —not your swimsuit."
+            "description": "Made so you can focus on connection, sunlight, and stillness — not your swimsuit."
           }
         }
       ]

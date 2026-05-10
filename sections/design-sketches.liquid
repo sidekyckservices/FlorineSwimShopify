@@ -1,0 +1,67 @@
+<section class="design-sketches section-padding" style="background-color: {{ section.settings.background_color }};">
+  <div class="design-sketches__inner animate-on-scroll">
+    <div class="design-sketches__item">
+      {% if section.settings.image_1 != blank %}
+        <img
+          src="{{ section.settings.image_1 | image_url: width: 800 }}"
+          alt="{{ section.settings.image_1.alt | default: 'Florine Swim crop top design sketch' }}"
+          class="design-sketches__image"
+          loading="lazy"
+        />
+      {% else %}
+        <img
+          src="{{ 'sketch-top.png' | asset_url }}"
+          alt="Florine Swim crop top design sketch — front and back view"
+          class="design-sketches__image"
+          loading="lazy"
+        />
+      {% endif %}
+    </div>
+    <div class="design-sketches__item">
+      {% if section.settings.image_2 != blank %}
+        <img
+          src="{{ section.settings.image_2 | image_url: width: 800 }}"
+          alt="{{ section.settings.image_2.alt | default: 'Florine Swim shorts design sketch' }}"
+          class="design-sketches__image"
+          loading="lazy"
+        />
+      {% else %}
+        <img
+          src="{{ 'sketch-shorts.png' | asset_url }}"
+          alt="Florine Swim shorts design sketch — front and back view"
+          class="design-sketches__image"
+          loading="lazy"
+        />
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Design Sketches",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#E6DED3"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Sketch 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Sketch 2"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Design Sketches"
+    }
+  ]
+}
+{% endschema %}

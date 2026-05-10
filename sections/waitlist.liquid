@@ -1,5 +1,4 @@
-<section id="waitlist" class="waitlist section-padding"
-  style="background-color: {{ section.settings.background_color }};{% if section.settings.background_image != blank %} background-image: url('{{ section.settings.background_image | image_url: width: 1920 }}'); background-size: cover; background-position: center;{% endif %}">
+<section id="waitlist" class="waitlist section-padding" style="background-color: {{ section.settings.background_color }};">
   <div class="waitlist__inner animate-on-scroll">
     <h2 class="waitlist__title">{{ section.settings.heading }}</h2>
 
@@ -56,11 +55,6 @@
       "default": "#CFC3B7"
     },
     {
-      "type": "image_picker",
-      "id": "background_image",
-      "label": "Background Image"
-    },
-    {
       "type": "text",
       "id": "heading",
       "label": "Heading",
@@ -100,7 +94,7 @@
       "type": "text",
       "id": "success_message",
       "label": "Success Message",
-      "default": "We'll be in touch —gently."
+      "default": "We'll be in touch — gently."
     }
   ],
   "presets": [

@@ -1,0 +1,122 @@
+<div class="collection">
+  <header class="collection__header section-padding">
+    {% if section.settings.eyebrow != blank %}
+      <p class="collection__eyebrow">{{ section.settings.eyebrow }}</p>
+    {% endif %}
+    <h1 class="collection__title">{{ collection.title | default: section.settings.heading | default: 'Shop Florine.' }}</h1>
+    {% if section.settings.description != blank %}
+      <p class="collection__description">{{ section.settings.description }}</p>
+    {% elsif collection.description != blank %}
+      <div class="collection__description">{{ collection.description }}</div>
+    {% endif %}
+  </header>
+
+  <section class="collection__grid-wrap">
+    <div class="collection__grid">
+      {% if collection.products.size > 0 %}
+        {% for product in collection.products %}
+          <article class="collection__card animate-on-scroll" data-delay="{{ forloop.index0 | times: 0.08 }}" style="transition-delay: {{ forloop.index0 | times: 0.08 }}s;">
+            <a href="{{ product.url }}" class="collection__card-link">
+              <div class="collection__card-media">
+                {% if product.featured_image != blank %}
+                  <img
+                    src="{{ product.featured_image | image_url: width: 800 }}"
+                    alt="{{ product.featured_image.alt | default: product.title | escape }}"
+                    class="collection__card-image"
+                    loading="lazy"
+                  />
+                {% else %}
+                  <img
+                    src="{{ 'tee-front.jpg' | asset_url }}"
+                    alt="{{ product.title | escape }}"
+                    class="collection__card-image"
+                    loading="lazy"
+                  />
+                {% endif %}
+              </div>
+              <h2 class="collection__card-title">{{ product.title }}</h2>
+              {% if product.metafields.product.tagline != blank %}
+                <p class="collection__card-tagline">{{ product.metafields.product.tagline }}</p>
+              {% endif %}
+              <p class="collection__card-price">{{ product.price | money_without_trailing_zeros }}</p>
+            </a>
+          </article>
+        {% endfor %}
+      {% else %}
+        {%- comment -%} Sample fallback for empty collection (theme editor / preview) {%- endcomment -%}
+        <article class="collection__card">
+          <a href="#" class="collection__card-link">
+            <div class="collection__card-media">
+              <img src="{{ 'tee-front.jpg' | asset_url }}" alt="The Florine Tee" class="collection__card-image" loading="lazy" />
+            </div>
+            <h2 class="collection__card-title">The Florine Tee</h2>
+            <p class="collection__card-tagline">Soft cotton everyday tee, quietly embroidered with the Florine rainbow.</p>
+            <p class="collection__card-price">$48</p>
+          </a>
+        </article>
+      {% endif %}
+
+      {% if section.settings.show_coming_soon %}
+        <article class="collection__card collection__card--placeholder">
+          <p class="collection__placeholder-eyebrow">{{ section.settings.coming_soon_eyebrow | default: 'Coming Soon' }}</p>
+          <p class="collection__placeholder-title">{{ section.settings.coming_soon_title | default: 'The First Swim Collection' }}</p>
+          <p class="collection__placeholder-note">{{ section.settings.coming_soon_note | default: 'Be the first to know.' }}</p>
+        </article>
+      {% endif %}
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The Collection"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading (fallback)",
+      "default": "Shop Florine."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description (override)",
+      "default": "A small, considered first chapter. More pieces — including our debut swim collection — arriving soon."
+    },
+    {
+      "type": "header",
+      "content": "Coming Soon Card"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_coming_soon",
+      "label": "Show \"Coming Soon\" card",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "coming_soon_eyebrow",
+      "label": "Coming Soon Eyebrow",
+      "default": "Coming Soon"
+    },
+    {
+      "type": "text",
+      "id": "coming_soon_title",
+      "label": "Coming Soon Title",
+      "default": "The First Swim Collection"
+    },
+    {
+      "type": "text",
+      "id": "coming_soon_note",
+      "label": "Coming Soon Note",
+      "default": "Be the first to know."
+    }
+  ]
+}
+{% endschema %}

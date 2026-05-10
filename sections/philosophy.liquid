@@ -1,52 +1,61 @@
-<section class="philosophy section-padding"
-  style="background-color: {{ section.settings.background_color }};{% if section.settings.background_image != blank %} background-image: url('{{ section.settings.background_image | image_url: width: 1920 }}'); background-size: cover; background-position: center;{% endif %}">
-  <div class="philosophy__inner philosophy__two-col animate-on-scroll">
+<section class="philosophy section-padding" style="background-color: {{ section.settings.background_color }};">
+  <div class="philosophy__inner animate-on-scroll">
     <div class="philosophy__content">
       <h2 class="philosophy__title">{{ section.settings.heading }}</h2>
 
       {% if section.settings.paragraph_1 != blank %}
         <p class="philosophy__text">{{ section.settings.paragraph_1 }}</p>
       {% endif %}
-
       {% if section.settings.paragraph_2 != blank %}
         <p class="philosophy__text">{{ section.settings.paragraph_2 }}</p>
       {% endif %}
-
       {% if section.settings.paragraph_3 != blank %}
         <p class="philosophy__text">{{ section.settings.paragraph_3 }}</p>
       {% endif %}
 
-      <div class="divider philosophy__divider"></div>
+      <div class="divider philosophy__divider" aria-hidden="true"></div>
 
       {% if section.settings.quote_line_1 != blank %}
         <p class="philosophy__quote">{{ section.settings.quote_line_1 }}</p>
       {% endif %}
-
       {% if section.settings.quote_line_2 != blank %}
         <p class="philosophy__quote">{{ section.settings.quote_line_2 }}</p>
       {% endif %}
     </div>
 
-    {% if section.settings.product_image_1 != blank or section.settings.product_image_2 != blank %}
-      <div class="philosophy__images">
-        {% if section.settings.product_image_1 != blank %}
-          <img
-            src="{{ section.settings.product_image_1 | image_url: width: 800 }}"
-            alt="{{ section.settings.product_image_1_alt | default: 'Florine Swim product' }}"
-            class="philosophy__product-img"
-            loading="lazy"
-          />
-        {% endif %}
-        {% if section.settings.product_image_2 != blank %}
-          <img
-            src="{{ section.settings.product_image_2 | image_url: width: 800 }}"
-            alt="{{ section.settings.product_image_2_alt | default: 'Florine Swim product' }}"
-            class="philosophy__product-img"
-            loading="lazy"
-          />
-        {% endif %}
-      </div>
-    {% endif %}
+    <div class="philosophy__media">
+      {% if section.settings.image_1 != blank %}
+        <img
+          src="{{ section.settings.image_1 | image_url: width: 800 }}"
+          alt="{{ section.settings.image_1.alt | default: 'Florine Swim crop top design sketch' }}"
+          class="philosophy__sketch philosophy__sketch--top"
+          loading="lazy"
+        />
+      {% else %}
+        <img
+          src="{{ 'sketch-top.png' | asset_url }}"
+          alt="Florine Swim crop top design sketch — front and back view"
+          class="philosophy__sketch philosophy__sketch--top"
+          loading="lazy"
+        />
+      {% endif %}
+
+      {% if section.settings.image_2 != blank %}
+        <img
+          src="{{ section.settings.image_2 | image_url: width: 800 }}"
+          alt="{{ section.settings.image_2.alt | default: 'Florine Swim shorts design sketch' }}"
+          class="philosophy__sketch philosophy__sketch--shorts"
+          loading="lazy"
+        />
+      {% else %}
+        <img
+          src="{{ 'sketch-shorts.png' | asset_url }}"
+          alt="Florine Swim shorts design sketch — front and back view"
+          class="philosophy__sketch philosophy__sketch--shorts"
+          loading="lazy"
+        />
+      {% endif %}
+    </div>
   </div>
 </section>
 
@@ -59,11 +68,6 @@
       "id": "background_color",
       "label": "Background Color",
       "default": "#E6DED3"
-    },
-    {
-      "type": "image_picker",
-      "id": "background_image",
-      "label": "Background Image"
     },
     {
       "type": "text",
@@ -103,25 +107,13 @@
     },
     {
       "type": "image_picker",
-      "id": "product_image_1",
-      "label": "Product Image 1"
-    },
-    {
-      "type": "text",
-      "id": "product_image_1_alt",
-      "label": "Product Image 1 Alt Text",
-      "default": "Florine Swim crop top"
+      "id": "image_1",
+      "label": "Sketch 1 (Top)"
     },
     {
       "type": "image_picker",
-      "id": "product_image_2",
-      "label": "Product Image 2"
-    },
-    {
-      "type": "text",
-      "id": "product_image_2_alt",
-      "label": "Product Image 2 Alt Text",
-      "default": "Florine Swim shorts"
+      "id": "image_2",
+      "label": "Sketch 2 (Shorts)"
     }
   ],
   "presets": [

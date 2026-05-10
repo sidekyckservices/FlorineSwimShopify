@@ -1,0 +1,449 @@
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign featured_image = product.featured_media.preview_image
+  if featured_image == blank
+    assign featured_image = product.featured_image
+  endif
+-%}
+
+<div class="product" data-product-handle="{{ product.handle }}">
+  <!-- Breadcrumb -->
+  {% if section.settings.show_breadcrumb %}
+    <div class="product__breadcrumb">
+      {%- liquid
+        assign back_url = section.settings.back_url
+        if back_url == blank
+          assign back_url = collections.all.url | default: '/collections/all'
+        endif
+      -%}
+      <a href="{{ back_url }}" class="product__back">
+        {%- render 'icon-arrow-left' -%}
+        <span>{{ section.settings.back_text | default: 'Back to Shop' }}</span>
+      </a>
+    </div>
+  {% endif %}
+
+  <section class="product__layout">
+    <!-- Gallery -->
+    <div class="product__gallery">
+      <div class="product__gallery-mobile" data-product-gallery-mobile>
+        {% if product.media.size > 0 %}
+          {% for media in product.media %}
+            {% if media.media_type == 'image' %}
+              <div class="product__gallery-mobile-slide">
+                <img
+                  src="{{ media.preview_image | image_url: width: 1000 }}"
+                  alt="{{ media.alt | default: product.title | escape }}"
+                  loading="lazy"
+                />
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <div class="product__gallery-mobile-slide">
+            <img src="{{ 'tee-front.jpg' | asset_url }}" alt="{{ product.title | escape | default: 'The Florine Tee' }}" loading="lazy" />
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="product__gallery-desktop">
+        <div class="product__gallery-main" data-product-main-image>
+          {% if featured_image != blank %}
+            <img
+              src="{{ featured_image | image_url: width: 1400 }}"
+              alt="{{ featured_image.alt | default: product.title | escape }}"
+              class="product__gallery-main-image"
+              loading="eager"
+            />
+          {% else %}
+            <img
+              src="{{ 'tee-front.jpg' | asset_url }}"
+              alt="{{ product.title | escape | default: 'The Florine Tee' }}"
+              class="product__gallery-main-image"
+              loading="eager"
+            />
+          {% endif %}
+        </div>
+
+        {% if product.media.size > 1 %}
+          <div class="product__gallery-thumbs">
+            {% for media in product.media limit: 6 %}
+              {% if media.media_type == 'image' %}
+                <button
+                  type="button"
+                  class="product__gallery-thumb {% if forloop.first %}is-active{% endif %}"
+                  data-product-thumb
+                  data-image-src="{{ media.preview_image | image_url: width: 1400 }}"
+                  data-image-alt="{{ media.alt | default: product.title | escape }}"
+                  aria-label="View image {{ forloop.index }}"
+                >
+                  <img src="{{ media.preview_image | image_url: width: 400 }}" alt="" loading="lazy" />
+                </button>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Details -->
+    <div class="product__details">
+      {% if section.settings.eyebrow != blank or product.tags contains 'available now' %}
+        <p class="product__eyebrow">{{ section.settings.eyebrow | default: 'Available Now' }}</p>
+      {% endif %}
+
+      <h1 class="product__title">{{ product.title | default: 'The Florine Tee' }}</h1>
+
+      {% if product.metafields.product.tagline != blank %}
+        <p class="product__tagline">{{ product.metafields.product.tagline }}</p>
+      {% elsif section.settings.tagline != blank %}
+        <p class="product__tagline">{{ section.settings.tagline }}</p>
+      {% endif %}
+
+      <div class="product__price-row">
+        <span class="product__price" data-product-price>
+          {% if product != blank %}
+            {{ current_variant.price | money_without_trailing_zeros }}
+          {% else %}
+            $48
+          {% endif %}
+        </span>
+        <span class="product__currency">{{ shop.currency }}</span>
+      </div>
+
+      {% if product != blank %}
+        <script type="application/json" data-product-variants>
+          {{ product.variants | json }}
+        </script>
+        <script type="application/json" data-product-options>
+          {{ product.options | json }}
+        </script>
+
+        {% form 'product', product, class: 'product__form', data-product-form: '' %}
+          {%- liquid
+            # Resolve Size Guide accordion content + label.
+            # Priority: product metafield (rich text) → section default → none (accordion hidden).
+            # We keep the metafield reference separate so it can be piped through
+            # | metafield_tag at render time (rich text returns a JSON AST otherwise).
+            assign size_guide_metafield = product.metafields.custom.size_guide
+            assign size_guide_default = section.settings.size_guide_text
+            assign size_guide_use_default = false
+            if size_guide_metafield == blank
+              assign size_guide_use_default = true
+            endif
+            assign size_guide_has_content = false
+            if size_guide_metafield != blank or size_guide_default != blank
+              assign size_guide_has_content = true
+            endif
+
+            assign size_guide_label = blank
+            assign mf_sg_label = product.metafields.custom.size_guide_label.value
+            if mf_sg_label != blank
+              assign size_guide_label = mf_sg_label
+            elsif product.metafields.custom.size_guide_label != blank
+              assign size_guide_label = product.metafields.custom.size_guide_label
+            endif
+            if size_guide_label == blank
+              assign size_guide_label = section.settings.size_guide_label
+            endif
+            if size_guide_label == blank
+              assign size_guide_label = 'Size guide'
+            endif
+          -%}
+          {% unless product.has_only_default_variant %}
+            {% for option in product.options_with_values %}
+              <div class="product__option">
+                <div class="product__option-header">
+                  <p class="product__option-label">{{ option.name }}</p>
+                </div>
+                <div class="product__option-values">
+                  {% for value in option.values %}
+                    <label class="product__option-value">
+                      <input
+                        type="radio"
+                        name="options[{{ option.name | escape }}]"
+                        value="{{ value | escape }}"
+                        {% if option.selected_value == value %}checked{% endif %}
+                      />
+                      <span>{{ value }}</span>
+                    </label>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endfor %}
+          {% endunless %}
+
+          <div class="product__option">
+            <p class="product__option-label">Quantity</p>
+            <div class="product__quantity">
+              <button type="button" class="product__quantity-btn" data-qty-decrement aria-label="Decrease quantity">
+                {%- render 'icon-minus' -%}
+              </button>
+              <input
+                type="number"
+                name="quantity"
+                value="1"
+                min="1"
+                class="product__quantity-input"
+                data-qty-input
+                aria-label="Quantity"
+              />
+              <button type="button" class="product__quantity-btn" data-qty-increment aria-label="Increase quantity">
+                {%- render 'icon-plus' -%}
+              </button>
+            </div>
+          </div>
+
+          <input type="hidden" name="id" value="{{ current_variant.id }}" data-product-variant-id />
+
+          <div class="product__buttons" data-product-cta>
+            <button
+              type="submit"
+              name="add"
+              class="btn btn--primary product__submit"
+              {% unless current_variant.available %}disabled{% endunless %}
+              data-add-to-cart
+            >
+              {% if current_variant.available %}
+                {{ section.settings.add_to_cart_text | default: 'Add to Cart' }}
+              {% else %}
+                {{ section.settings.sold_out_text | default: 'Sold Out' }}
+              {% endif %}
+            </button>
+          </div>
+        {% endform %}
+      {% else %}
+        <a href="/#waitlist" class="btn btn--primary product__submit">
+          Join the Waitlist
+        </a>
+      {% endif %}
+
+      <!-- Accordion -->
+      <div class="product__accordion">
+        <details class="product__accordion-item" open>
+          <summary class="product__accordion-trigger">
+            <span>{{ section.settings.description_label | default: 'Description' }}</span>
+            <span class="product__accordion-icon">{%- render 'icon-chevron-down' -%}</span>
+          </summary>
+          <div class="product__accordion-content">
+            {% if product.description != blank %}
+              {{ product.description }}
+            {% else %}
+              {{ section.settings.fallback_description }}
+            {% endif %}
+          </div>
+        </details>
+
+        {% if section.settings.details_text != blank %}
+          <details class="product__accordion-item">
+            <summary class="product__accordion-trigger">
+              <span>{{ section.settings.details_label | default: 'The details' }}</span>
+              <span class="product__accordion-icon">{%- render 'icon-chevron-down' -%}</span>
+            </summary>
+            <div class="product__accordion-content">
+              {{ section.settings.details_text }}
+            </div>
+          </details>
+        {% endif %}
+
+        {% if section.settings.show_size_guide and size_guide_has_content %}
+          <details class="product__accordion-item">
+            <summary class="product__accordion-trigger">
+              <span>{{ size_guide_label }}</span>
+              <span class="product__accordion-icon">{%- render 'icon-chevron-down' -%}</span>
+            </summary>
+            <div class="product__accordion-content">
+              {%- if size_guide_use_default -%}
+                {{ size_guide_default }}
+              {%- else -%}
+                {{ size_guide_metafield | metafield_tag }}
+              {%- endif -%}
+            </div>
+          </details>
+        {% endif %}
+
+        {% if section.settings.care_text != blank %}
+          <details class="product__accordion-item">
+            <summary class="product__accordion-trigger">
+              <span>{{ section.settings.care_label | default: 'Care' }}</span>
+              <span class="product__accordion-icon">{%- render 'icon-chevron-down' -%}</span>
+            </summary>
+            <div class="product__accordion-content">
+              {{ section.settings.care_text }}
+            </div>
+          </details>
+        {% endif %}
+
+        {% if section.settings.shipping_text != blank %}
+          <details class="product__accordion-item">
+            <summary class="product__accordion-trigger">
+              <span>{{ section.settings.shipping_label | default: 'Shipping & Returns' }}</span>
+              <span class="product__accordion-icon">{%- render 'icon-chevron-down' -%}</span>
+            </summary>
+            <div class="product__accordion-content">
+              {{ section.settings.shipping_text }}
+            </div>
+          </details>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+  {% if section.settings.brand_quote != blank %}
+    <section class="product__brand-strip" style="background-color: {{ section.settings.brand_strip_bg }};">
+      <p class="product__brand-quote">{{ section.settings.brand_quote }}</p>
+    </section>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Breadcrumb"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_breadcrumb",
+      "label": "Show \"Back\" breadcrumb",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "back_text",
+      "label": "Back Link Text",
+      "default": "Back to Shop"
+    },
+    {
+      "type": "url",
+      "id": "back_url",
+      "label": "Back Link URL"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Available Now"
+    },
+    {
+      "type": "textarea",
+      "id": "tagline",
+      "label": "Tagline (fallback)",
+      "default": "Soft cotton everyday tee, quietly embroidered with the Florine rainbow."
+    },
+    {
+      "type": "header",
+      "content": "Size Guide"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_size_guide",
+      "label": "Show size guide accordion",
+      "info": "Per-product content can be set via metafields (custom.size_guide rich text, custom.size_guide_label single line text). The default below is used when a product has no metafield value.",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "size_guide_label",
+      "label": "Accordion Label",
+      "default": "Size guide"
+    },
+    {
+      "type": "richtext",
+      "id": "size_guide_text",
+      "label": "Default Size Guide Content",
+      "default": "<p>Sizes run true to fit. Refer to your usual size — and reach out at hello@florineswim.com if you'd like a personal recommendation.</p>"
+    },
+    {
+      "type": "text",
+      "id": "add_to_cart_text",
+      "label": "Add to Cart Text",
+      "default": "Add to Cart"
+    },
+    {
+      "type": "text",
+      "id": "sold_out_text",
+      "label": "Sold Out Text",
+      "default": "Sold Out"
+    },
+    {
+      "type": "header",
+      "content": "Accordion Labels"
+    },
+    {
+      "type": "text",
+      "id": "description_label",
+      "label": "Description Label",
+      "default": "Description"
+    },
+    {
+      "type": "text",
+      "id": "details_label",
+      "label": "Details Label",
+      "default": "The details"
+    },
+    {
+      "type": "text",
+      "id": "care_label",
+      "label": "Care Label",
+      "default": "Care"
+    },
+    {
+      "type": "text",
+      "id": "shipping_label",
+      "label": "Shipping Label",
+      "default": "Shipping & Returns"
+    },
+    {
+      "type": "header",
+      "content": "Accordion Content"
+    },
+    {
+      "type": "richtext",
+      "id": "fallback_description",
+      "label": "Fallback Description",
+      "default": "<p>A small piece of the brand to wear while we prepare our first swim collection. Made for pool mornings, coffee runs, and slow afternoons by the water.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "details_text",
+      "label": "The Details",
+      "default": "<ul><li>100% organic combed cotton, midweight 180 gsm</li><li>Relaxed, true-to-size fit with dropped shoulder</li><li>Tonal embroidered rainbow on the left chest</li><li>Pre-washed for softness; minimal shrinkage</li><li>Designed in California · Ethically made</li></ul>"
+    },
+    {
+      "type": "richtext",
+      "id": "care_text",
+      "label": "Care",
+      "default": "<p>Machine wash cold with like colors. Tumble dry low or lay flat to dry. Iron inside out on low if needed.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "shipping_text",
+      "label": "Shipping & Returns",
+      "default": "<p>Free shipping on orders over $75. Standard delivery 3–5 business days. Easy 30-day returns on unworn items with tags attached.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Brand Strip"
+    },
+    {
+      "type": "color",
+      "id": "brand_strip_bg",
+      "label": "Brand Strip Background",
+      "default": "#E6DED3"
+    },
+    {
+      "type": "text",
+      "id": "brand_quote",
+      "label": "Brand Quote",
+      "default": "\"Florine sells peace of mind, not perfection.\""
+    }
+  ]
+}
+{% endschema %}

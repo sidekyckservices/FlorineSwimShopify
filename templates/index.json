@@ -13,10 +13,13 @@
       "type": "hero",
       "settings": {
         "background_color": "#fbf7f3",
+        "show_background_image": false,
+        "logo": "shopify://shop_images/Florine-Logos-Brown.png",
         "heading": "Swimwear for everywhere.",
         "subheading": "Designed for water. Made for everything around it.",
-        "description_1": "Most swimwear is made for escape. Florine is made for real life —the conversations after the swim, the slow mornings, the full days that don't pause just because you're near the water.",
-        "description_2": "Created so you can move, sit, laugh, and live —without adjusting, hiding, or second-guessing.",
+        "description_1": "Most swimwear is made for escape. Florine is made for real life — the conversations after the swim, the slow mornings, the full days that don't pause just because you're near the water.",
+        "description_2": "Created so you can move, sit, laugh, and live — without adjusting, hiding, or second-guessing.",
+        "button_link": "#featured-tee",
         "button_text": "Be part of the beginning.",
         "button_note": "We'll send a note when Florine arrives."
       }
@@ -30,38 +33,120 @@
         "paragraph_2": "Florine Swim is made for the moments that matter.",
         "paragraph_3": "Each piece is created with thoughtful coverage and gentle support, so nothing pulls, shifts, or distracts you from being present.",
         "quote_line_1": "You are already enough.",
-        "quote_line_2": "We simply design swimwear that lets you feel it.",
-        "product_image_1": "shopify://shop_images/Florine_Swim_Website-01.png",
-        "product_image_1_alt": "Florine Swim crop top",
-        "product_image_2": "shopify://shop_images/Florine_Swim_Website-02.png",
-        "product_image_2_alt": "Florine Swim shorts"
+        "quote_line_2": "We simply design swimwear that lets you feel it."
+      }
+    },
+    "featured-product": {
+      "type": "featured-product",
+      "settings": {
+        "background_color": "#fbf7f3",
+        "product": "the-florine-swim-tee",
+        "eyebrow": "Available Now",
+        "tagline": "",
+        "description": "<p>A limited edition light blue t-shirt with the Florine rainbow logo on the upper left chest. Simple, beautiful, and meaningful — and extra special because it drops on May 7th, my grandmother Florine's heavenly birthday. This whole brand exists because of her, and this first piece is dedicated to her memory.</p>",
+        "currency_label": "USD",
+        "button_text": "Shop Now",
+        "fallback_title": "The Florine Tee.",
+        "fallback_price": "$40",
+        "fallback_url": "/products/florine-rainbow-tee"
       }
     },
     "principles": {
       "type": "principles",
+      "blocks": {
+        "p1": {
+          "type": "principle",
+          "settings": {
+            "icon": "feather",
+            "title": "Ease Over Effort",
+            "description": "Designed so you can move, sit, and live your day without fixing or adjusting."
+          }
+        },
+        "p2": {
+          "type": "principle",
+          "settings": {
+            "icon": "shield",
+            "title": "Comfort You Can Trust",
+            "description": "Support that feels natural and secure, so you can forget about what you're wearing."
+          }
+        },
+        "p3": {
+          "type": "principle",
+          "settings": {
+            "icon": "flower",
+            "title": "Quiet Femininity",
+            "description": "Soft, polished silhouettes that feel beautiful without asking you to reveal more than you'd like."
+          }
+        },
+        "p4": {
+          "type": "principle",
+          "settings": {
+            "icon": "sun",
+            "title": "Presence in the Moment",
+            "description": "Created so your attention stays on connection, sunlight, and living — not your swimsuit."
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "p4"
+      ],
       "settings": {
-        "background_color": "#fbf7f3",
         "heading": "So you can just be there."
       }
     },
     "emotional": {
       "type": "emotional",
+      "blocks": {
+        "step-1": {
+          "type": "feeling",
+          "settings": {
+            "title": "Unaware",
+            "text": "You forget to adjust or check in the mirror."
+          }
+        },
+        "step-2": {
+          "type": "feeling",
+          "settings": {
+            "title": "At Ease",
+            "text": "You feel comfortable enough to simply move through the day."
+          }
+        },
+        "step-3": {
+          "type": "feeling",
+          "settings": {
+            "title": "Present",
+            "text": "And before long, your attention shifts back to what really matters."
+          }
+        }
+      },
+      "block_order": [
+        "step-1",
+        "step-2",
+        "step-3"
+      ],
       "settings": {
         "background_color": "#d8c3a5",
-        "heading": "How It Should Feel.",
-        "intro_text": "When you slip into Florine, you stop thinking about how everything fits.",
-        "closing_quote": "Florine is swimwear you can trust."
+        "eyebrow": "— The Florine Feeling",
+        "heading": "How it should feel.",
+        "lead": "When you slip into Florine, you stop thinking about how everything fits — and remember why you came to the water in the first place.",
+        "subnote": "a quiet shift, in three movements",
+        "closing_quote": "Florine is swimwear",
+        "closing_emphasis": "you can trust."
       }
     },
-    "brand-story": {
-      "type": "brand-story",
+    "why-florine": {
+      "type": "why-florine",
       "settings": {
         "background_color": "#fbf7f3",
+        "image": "shopify://shop_images/ChatGPT_Image_Apr_28_2026_11_30_23_AM.png",
         "heading": "Why Florine?",
-        "paragraph_1": "Florine Swim is named after my grandmother —a woman who carried quiet confidence wherever she went.",
+        "paragraph_1": "Florine Swim is named after my grandmother — a woman who carried quiet confidence wherever she went.",
         "paragraph_2": "She raised fourteen children and lived a life full of movement, care, and constant presence for others. Yet she carried herself with a calm strength and natural grace that never asked for attention.",
-        "paragraph_3": "As I have grown older, I realize how rare it is to find swimwear that allows women to feel that same ease —pieces that support real life instead of distracting from it.",
-        "paragraph_4": "Florine was created to offer something different: swimwear designed for presence."
+        "paragraph_3": "As I have grown older, I realize how rare it is to find swimwear that allows women to feel that same ease — pieces that support real life instead of distracting from it.",
+        "closing_quote": "Florine was created to offer something different: swimwear designed for presence."
       }
     },
     "waitlist": {
@@ -74,16 +159,17 @@
         "button_text": "Experience Florine First",
         "note_text": "No urgency. Just a gentle hello when the time comes.",
         "success_title": "Thank you.",
-        "success_message": "We'll be in touch —gently."
+        "success_message": "We'll be in touch — gently."
       }
     }
   },
   "order": [
     "hero",
     "philosophy",
+    "featured-product",
     "principles",
     "emotional",
-    "brand-story",
+    "why-florine",
     "waitlist"
   ]
 }

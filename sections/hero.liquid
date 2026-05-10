@@ -1,4 +1,33 @@
-<section class="hero" style="background-color: {{ section.settings.background_color }};{% if section.settings.background_image != blank %} background-image: url('{{ section.settings.background_image | image_url: width: 1920 }}'); background-size: cover; background-position: center;{% endif %}">
+{%- liquid
+  assign button_link = section.settings.button_link
+  if button_link == blank
+    assign button_link = '#featured-tee'
+  endif
+-%}
+
+<section class="hero" id="section-{{ section.id }}" style="background-color: {{ section.settings.background_color }};">
+  {% if section.settings.show_background_image %}
+    <div class="hero__background" aria-hidden="true">
+      {% if section.settings.background_image != blank %}
+        <img
+          src="{{ section.settings.background_image | image_url: width: 1920 }}"
+          alt=""
+          class="hero__background-image"
+          loading="eager"
+          width="1920"
+          height="1080"
+        />
+      {% else %}
+        <img
+          src="{{ 'hero-beach.jpg' | asset_url }}"
+          alt=""
+          class="hero__background-image"
+          loading="eager"
+        />
+      {% endif %}
+    </div>
+  {% endif %}
+
   <div class="hero__content">
     <div class="hero-logo-fade" data-delay="0.2">
       {% if section.settings.logo != blank %}
@@ -10,7 +39,7 @@
         />
       {% else %}
         <img
-          src="{{ 'florine-logo.png' | asset_url }}"
+          src="{{ 'florine-logo.jpg' | asset_url }}"
           alt="{{ shop.name }}"
           class="hero__logo"
           loading="eager"
@@ -22,9 +51,11 @@
       {{ section.settings.heading }}
     </h1>
 
-    <p class="hero__subtitle hero-fade" data-delay="0.6">
-      {{ section.settings.subheading }}
-    </p>
+    {% if section.settings.subheading != blank %}
+      <p class="hero__subtitle hero-fade" data-delay="0.6">
+        {{ section.settings.subheading }}
+      </p>
+    {% endif %}
 
     <div class="hero__description hero-fade" data-delay="0.8">
       {% if section.settings.description_1 != blank %}
@@ -36,12 +67,12 @@
     </div>
 
     <div class="hero__cta hero-fade" data-delay="1.0">
-      <a href="#waitlist" class="btn btn--primary">
+      <a href="{{ button_link }}" class="btn btn--primary">
         {{ section.settings.button_text }}
       </a>
-      <span class="hero__cta-note">
-        {{ section.settings.button_note }}
-      </span>
+      {% if section.settings.button_note != blank %}
+        <span class="hero__cta-note">{{ section.settings.button_note }}</span>
+      {% endif %}
     </div>
   </div>
 </section>
@@ -55,6 +86,12 @@
       "id": "background_color",
       "label": "Background Color",
       "default": "#FBF7F3"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_background_image",
+      "label": "Show subtle background image",
+      "default": false
     },
     {
       "type": "image_picker",
@@ -82,13 +119,18 @@
       "type": "textarea",
       "id": "description_1",
       "label": "Description Paragraph 1",
-      "default": "Most swimwear is made for escape. Florine is made for real life —the conversations after the swim, the slow mornings, the full days that don't pause just because you're near the water."
+      "default": "Most swimwear is made for escape. Florine is made for real life — the conversations after the swim, the slow mornings, the full days that don't pause just because you're near the water."
     },
     {
       "type": "textarea",
       "id": "description_2",
       "label": "Description Paragraph 2",
-      "default": "Created so you can move, sit, laugh, and live —without adjusting, hiding, or second-guessing."
+      "default": "Created so you can move, sit, laugh, and live — without adjusting, hiding, or second-guessing."
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
     },
     {
       "type": "text",

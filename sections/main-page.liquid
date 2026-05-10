@@ -1,0 +1,18 @@
+<div class="page section-padding">
+  <article class="page__inner">
+    <header class="page__header animate-on-scroll">
+      <h1 class="page__title">{{ page.title }}</h1>
+    </header>
+
+    <div class="page__content animate-on-scroll" data-delay="0.1">
+      {{ page.content }}
+    </div>
+  </article>
+</div>
+
+{% schema %}
+{
+  "name": "Page",
+  "settings": []
+}
+{% endschema %}

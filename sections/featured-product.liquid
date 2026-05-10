@@ -1,0 +1,165 @@
+{%- liquid
+  assign featured_product = all_products[section.settings.product]
+  assign show_real_product = false
+  if featured_product != blank and featured_product.handle != blank and featured_product.available
+    assign show_real_product = true
+  endif
+
+  if show_real_product
+    assign product_url = featured_product.url
+    assign product_title = featured_product.title
+    assign product_price = featured_product.price | money
+    assign product_image = featured_product.featured_image
+  else
+    assign product_url = section.settings.fallback_url | default: '#'
+    assign product_title = section.settings.fallback_title
+    assign product_price = section.settings.fallback_price
+  endif
+-%}
+
+<section id="featured-tee" class="featured-product section-padding" style="background-color: {{ section.settings.background_color }};">
+  <div class="featured-product__inner">
+    <div class="featured-product__media animate-on-scroll">
+      <a href="{{ product_url }}" class="featured-product__media-link">
+        <div class="featured-product__media-frame">
+          {% if show_real_product and product_image != blank %}
+            <img
+              src="{{ product_image | image_url: width: 1200 }}"
+              alt="{{ product_image.alt | default: product_title | escape }}"
+              class="featured-product__image"
+              loading="lazy"
+              width="1200"
+              height="1500"
+            />
+          {% elsif section.settings.fallback_image != blank %}
+            <img
+              src="{{ section.settings.fallback_image | image_url: width: 1200 }}"
+              alt="{{ section.settings.fallback_image.alt | default: product_title | escape }}"
+              class="featured-product__image"
+              loading="lazy"
+            />
+          {% else %}
+            <img
+              src="{{ 'tee-front.jpg' | asset_url }}"
+              alt="{{ product_title | escape }}"
+              class="featured-product__image"
+              loading="lazy"
+            />
+          {% endif %}
+        </div>
+      </a>
+    </div>
+
+    <div class="featured-product__content animate-on-scroll" data-delay="0.1">
+      {% if section.settings.eyebrow != blank %}
+        <p class="featured-product__eyebrow">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+
+      <h2 class="featured-product__title">{{ product_title }}</h2>
+
+      {% if section.settings.tagline != blank %}
+        <p class="featured-product__tagline">{{ section.settings.tagline }}</p>
+      {% endif %}
+
+      {% if section.settings.description != blank %}
+        <div class="featured-product__description">{{ section.settings.description }}</div>
+      {% endif %}
+
+      <div class="featured-product__price-row">
+        <span class="featured-product__price">{{ product_price }}</span>
+        {% if section.settings.currency_label != blank %}
+          <span class="featured-product__currency">{{ section.settings.currency_label }}</span>
+        {% endif %}
+      </div>
+
+      <a href="{{ product_url }}" class="btn btn--primary featured-product__cta">
+        {{ section.settings.button_text }}
+        <span class="btn__arrow" aria-hidden="true">&rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured Product",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FBF7F3"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "header",
+      "content": "Copy"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Available Now"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "A soft, everyday cotton tee — quietly embroidered with the Florine rainbow."
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>A small piece of the brand to wear while we prepare our first swim collection. Made for pool mornings, coffee runs, and slow afternoons by the water.</p>"
+    },
+    {
+      "type": "text",
+      "id": "currency_label",
+      "label": "Currency Label",
+      "default": "USD"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Shop the Tee"
+    },
+    {
+      "type": "header",
+      "content": "Fallback (when no product selected)"
+    },
+    {
+      "type": "text",
+      "id": "fallback_title",
+      "label": "Fallback Title",
+      "default": "The Florine Tee."
+    },
+    {
+      "type": "text",
+      "id": "fallback_price",
+      "label": "Fallback Price",
+      "default": "$48"
+    },
+    {
+      "type": "image_picker",
+      "id": "fallback_image",
+      "label": "Fallback Image"
+    },
+    {
+      "type": "url",
+      "id": "fallback_url",
+      "label": "Fallback URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Product"
+    }
+  ]
+}
+{% endschema %}

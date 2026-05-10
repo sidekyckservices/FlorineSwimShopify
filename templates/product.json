@@ -1,0 +1,43 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "show_breadcrumb": true,
+        "back_text": "Back to Shop",
+        "back_url": "",
+        "eyebrow": "Available Now",
+        "tagline": "A limited edition light blue t-shirt with the Florine rainbow logo on the upper left chest.",
+        "show_size_guide": true,
+        "add_to_cart_text": "Add to Cart",
+        "sold_out_text": "Sold Out",
+        "buy_now_text": "Buy it now",
+        "trust_1": "",
+        "trust_2": "",
+        "trust_3": "",
+        "description_label": "Description",
+        "details_label": "The details",
+        "care_label": "Care",
+        "shipping_label": "Shipping & Returns",
+        "fallback_description": "<p>A small piece of the brand to wear while we prepare our first swim collection.</p><p>Made from soft, breathable cotton with a relaxed, easy fit — designed to feel like a slow exhale. Wear it with linen shorts on a beach walk, over your swimsuit on the way home, or alone on the kind of mornings that don't need to hurry.</p>",
+        "details_text": "<p>I did my homework on this shirt. It's made with recycled plastic bottles, organic cotton, and modal fabric — known for being incredibly soft. It's quality you can feel good about, which is what Florine stands for.</p>",
+        "care_text": "<p>Machine wash cold with like colors. Tumble dry low or lay flat to dry. Iron inside out on low if needed.</p>",
+        "shipping_text": "<p>Free shipping. Standard delivery 3–5 business days. </p>",
+        "brand_strip_bg": "#e6ded3",
+        "brand_quote": "\"May there always be a rainbow to help make your dreams come true.\""
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
